@@ -2,23 +2,22 @@
 // +----------------------------------------------------------------------
 // | 认证
 // +----------------------------------------------------------------------
-// | Author: weika <iweika@aliyun.com>
+// | Author: cc <iweika@aliyun.com>
 // +----------------------------------------------------------------------
 // | Date: 2020/03/28
 // +----------------------------------------------------------------------
 // | Time: 21:30
 // +----------------------------------------------------------------------
 
-namespace App\Http\Controllers\System;
+namespace App\Http\Controllers\Admin;
 
 use App\Utils\CodeUtil;
-use App\Http\Controllers\BaseController;
-use App\Http\Requests\System\AuthRequest;
-use App\Logics\System\AuthLogic;
+use App\Http\Requests\Admin\AuthRequest;
+use App\Http\Logics\Admin\AuthLogic;
 use Illuminate\Support\Facades\Cache;
 
 
-class AuthController extends BaseController
+class AuthController extends BaseAdmin
 {
     /**
      * 登陆
@@ -30,12 +29,13 @@ class AuthController extends BaseController
      */
     public function login(AuthRequest $request,AuthLogic $authLogic)
     {
-        $params = $request->validated();
-        $res = $authLogic->login($params);
-        if(is_array($res)){
-            return $this->success('登陆成功', $res);
+        $result = $authLogic->loginCheck($request->validated());
+        if($result['code'] == 1000){
+            return $this->success('登陆成功', $result['data']);
+        }elseif($result['code'] == 3003){
+            return $this->error(CodeUtil::MUST_RESET_PASSWD,$result['info']);
         }else{
-            return $this->error(CodeUtil::ACTION_ERROR, $res);
+            return $this->error(CodeUtil::ACTION_ERROR, $result['info']);
         }
     }
 
@@ -45,7 +45,7 @@ class AuthController extends BaseController
      * @param boolean
      * @param string
      *
-     * @return array
+     * @return object
      * @throws \Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */

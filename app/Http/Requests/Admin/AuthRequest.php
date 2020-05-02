@@ -2,13 +2,13 @@
 // +----------------------------------------------------------------------
 // | 表单验证
 // +----------------------------------------------------------------------
-// | Author: weika <iweika@aliyun.com>
+// | Author: cc <iweika@aliyun.com>
 // +----------------------------------------------------------------------
 // | Date: 2020/03/24
 // +----------------------------------------------------------------------
 // | Time: 15:37
 // +----------------------------------------------------------------------
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\ApiRequest;
 
@@ -24,16 +24,15 @@ class AuthRequest extends ApiRequest
      * */
     public $rules = [
         'token'=>['required'],
-        'phone'=>['required','min:11','max:11'],
+        'username'=>['required','max:64'],
         'passwd'=>['required','min:6','max:18'],
         'old_passwd'=>['required','min:6','max:18'],
         'new_passwd'=>['required','min:6','max:18'],
     ];
 
     public $messages = [
-        'phone.required'=>'请输入登陆手机号',
-        'phone.m*'=>'你输入的手机号码有误',
-        'passwd.required'=>'请输入登陆密码',
+        'username.*'=>'请输入正确的登陆名',
+        'passwd.required'=>'请输入正确登陆密码',
         'passwd.m*'=>'登陆密码长度为6~18位',
         'token'=>'token不能为空',
         'old_passwd.required'=>'旧密码不能为空',
@@ -43,7 +42,7 @@ class AuthRequest extends ApiRequest
     ];
     //场景配置，场景名称为控制器操作方法名称
     public $scenes = [
-        'login'=>['phone','passwd'],
+        'login'=>['username','passwd'],
         'logout'=>['token'],
         'editPasswd'=>['old_passwd','new_passwd'],
         'loginInfo'=>['token'],

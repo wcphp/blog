@@ -2,39 +2,24 @@
 // +----------------------------------------------------------------------
 // |
 // +----------------------------------------------------------------------
-// | Author: weika <iweika@aliyun.com>
+// | Author: cc <iweika@aliyun.com>
 // +----------------------------------------------------------------------
 // | Date: 2020/03/26
 // +----------------------------------------------------------------------
 // | Time: 14:39
 // +----------------------------------------------------------------------
 
-namespace App\ModelFilters;
+namespace App\Http\ModelFilters;
 
 
 use EloquentFilter\ModelFilter;
 
-class GoodsModelFilter extends ModelFilter
+class BuildingModelFilter extends ModelFilter
 {
-    public function category($value)
+    public function landlord($value)
     {
         if(!empty($value)){
-            return $this->where('category_id',$value);
-        }
-        return $this;
-    }
-    public function level($value)
-    {
-        if(!empty($value)){
-            return $this->where('level_id',$value);
-        }
-        return $this;
-    }
-
-    public function status($value)
-    {
-        if(!empty($value)){
-            return $this->where('status',$value);
+            return $this->where('landlord_id',$value);
         }
         return $this;
     }

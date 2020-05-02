@@ -1,23 +1,21 @@
 <?php
 // +----------------------------------------------------------------------
-// | 后台账户
+// |
 // +----------------------------------------------------------------------
-// | Author: weika <iweika@aliyun.com>
+// | Author: cc <iweika@aliyun.com>
 // +----------------------------------------------------------------------
 // | Date: 2020/03/28
 // +----------------------------------------------------------------------
 // | Time: 22:14
 // +----------------------------------------------------------------------
 
-namespace App\Models\System;
+namespace App\Http\Models;
 
 
-use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AdminModel extends BaseModel
+class SystemLogModel extends BaseModel
 {
-    use SoftDeletes;
-    protected $table = 'admin';
-    protected $primaryKey = 'admin_id';
+
+    protected $table = 'system_log';
+    protected $primaryKey = 'slog_id';
 }

@@ -2,26 +2,19 @@
 // +----------------------------------------------------------------------
 // |
 // +----------------------------------------------------------------------
-// | Author: weika <iweika@aliyun.com>
+// | Author: cc <iweika@aliyun.com>
 // +----------------------------------------------------------------------
-// | Date: 2020/03/26
+// | Date: 2020/03/28
 // +----------------------------------------------------------------------
-// | Time: 14:39
+// | Time: 22:14
 // +----------------------------------------------------------------------
 
-namespace App\ModelFilters;
+namespace App\Http\Models;
 
 
-use EloquentFilter\ModelFilter;
-
-class BuildingRoomLayoutModelFilter extends ModelFilter
+class RoleModel extends BaseModel
 {
-    public function building($value)
-    {
-        if(!empty($value)){
-            return $this->where('building_id',$value);
-        }
-        return $this;
-    }
 
+    protected $table = 'role';
+    protected $primaryKey = 'role_id';
 }
