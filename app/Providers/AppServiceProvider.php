@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Http\Common\Code;
+use Illuminate\Support\Facades\DB;
+use App\Http\Common\ConstMap;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        DB::listen(function ($query) {
+            // echo $query->sql;
+            // $query->bindings
+            // $query->time
+        });
     }
+
 }
